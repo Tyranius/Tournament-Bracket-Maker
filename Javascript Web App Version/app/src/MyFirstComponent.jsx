@@ -1,4 +1,5 @@
 import React from 'react';
+import Participants from './Participants.jsx';
 
 const MyFirstComponent = () => (
     <div>
@@ -12,7 +13,7 @@ const MyFirstComponent = () => (
             <br />
             I'm gonna do stuff with it. Yay!
         </div>
-        <img src="public/cats-meme.gif" height={500} width={500} />
+        <Participants />
     </div>
 );
 
