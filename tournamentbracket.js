@@ -102,37 +102,6 @@ let generateBracketFromInput = (input) => {
         }
     }
 
-    // // Creating an empty dictionary for when bracket is ordered least to greatest.
-    // let rankings = {}
-
-    // // This was the way I chose to organize the bracket from least to greatest in rankings because this is how I chose to
-    // // make the program print the combinations of people in order.
-    // while len(bracket) != 0:
-
-    //     //     This is just the maximum for the need of a high number. This can be increased if necessary.
-    //     b = 100
-
-    // //     The for loop takes it through the bracket dictionary and finds the smallest key value available
-    // for k in bracket.keys():
-    //     if k < b:
-    //         b = k
-
-    // //     This loads up the rankings dictionary with the ordered participants from lowest to highest position
-    // rankings[b] = bracket[b]
-
-    // //     This removes the key/value pair from the brackets dictionary which allows the while loop to end
-    // del bracket[b]
-
-    // // This puts a bye in for the last key/value pair if the dictionary was an odd numbered length because I wanted more
-    // // usability with the printed document at the end.
-    // if len(rankings) % 2 != 0:
-    //     rankings[len(rankings) + 1] = "Bye"
-    // print(rankings)
-
-    // // This will create a new file Tournament which will present all of the names in order of play
-    // with open("Tournament.txt", "w") as file:
-    // for key in rankings:
-    //     file.write(str(key) + ":  " + rankings[key] + "\n\n")
     process.exit();
 }
 
