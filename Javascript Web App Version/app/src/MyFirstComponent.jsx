@@ -1,20 +1,16 @@
 import React from 'react';
 import Participants from './Participants.jsx';
 
-const MyFirstComponent = () => (
-    <div>
-        <h2>
-            Hello World
-        </h2>
+const MyFirstComponent = () => {
+    const something = 5;
+    return (
         <div>
-            This is my first webpage!!!!!!
-            "\n"
-            {"\n"}
-            <br />
-            I'm gonna do stuff with it. Yay!
+            <h2>
+                Tournament Bracket ({something})
+            </h2>
+            <Participants something={something} />
         </div>
-        <Participants />
-    </div>
-);
+    );
+};
 
 export default MyFirstComponent;

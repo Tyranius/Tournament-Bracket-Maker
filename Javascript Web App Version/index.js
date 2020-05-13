@@ -14,15 +14,69 @@ app.get('/participants-text', (req, res) => {
     res.sendStatus(504);
 });
 
+const participant = {
+    id: 0,
+    name: "",
+    oponents: [],
+    wins: 0,
+    losses: 0
+};
+
+const participants = [
+    {
+        id: 0,
+        name: "Becca",
+        wins: 0,
+        losses: 0
+    },
+    {
+        id: 1,
+        name: "Daniel",
+        wins: 0,
+        losses: 0
+    },
+    {
+        id: 2,
+        name: "Shaun",
+        wins: 0,
+        losses: 0
+    },
+    {
+        id: 3,
+        name: "Kari",
+        wins: 0,
+        losses: 0
+    }
+]
+
+// Browser -> http://localhost:3000/participants
+// Sever -> {} to client
 app.get('/participants', (req, res) => {
-    /** inside here return a JSON object like this:
-    * {
-    *      participants: []
-    * }
-    * see result at: http://localhost:3000/
-    */
-   res.sendStatus(504);
+    setTimeout(() => {
+        res.json({participants});
+    }, 2000);
 })
 
-app.get('/I-am-a-little-teapot-this-we-know', (req, res) => res.send("foo"))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+// MANA -- MongoDB, Apache, NodeJs, AngularJS
+// MANR -- MongoDB, Apache, NodeJs, ReactJS
+// SANR -- SQL, Apache, NodeJS, ReactJS
+
+// Teachers | Id, Name
+
+// Students | Id, Name, TeacherId
+
+// Mongo
+// student: {
+//     id: "3",
+//     name: "John Doe",
+//     Teacher: {
+//         id: "1",
+//         name: "Mr Rizk",
+//         Id: "32"
+//     }    
+// }
+
+//https://www.google.com
+// Domain Name Servers -> https://.... -> 8.8.8.8
