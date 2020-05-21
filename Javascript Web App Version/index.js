@@ -27,8 +27,7 @@ app.get('/participants', (req, res) => {
 app.post('/participants', (req, res) => {
     const currentDatabase = JSON.parse(fs.readFileSync(dbPath));
     const { participants } = currentDatabase;
-    console.log(req.body);
-    currentDatabase.participants = [...participants, { ...req.body, id: participants[participants.length - 1].id + 1 }].sort(((a,b) => a.id - b.id));
+    currentDatabase.participants = [...participants, { ...req.body, id: participants[participants.length - 1].id + 1 }].sort(((a, b) => a.id - b.id));
     fs.writeFileSync(dbPath, JSON.stringify(currentDatabase));
     res.status(200).send();
 });
@@ -36,8 +35,17 @@ app.post('/participants', (req, res) => {
 app.put('/participants', (req, res) => {
     const currentDatabase = JSON.parse(fs.readFileSync(dbPath));
     const { participants } = currentDatabase;
-    console.log(req.body);
-    currentDatabase.participants = [...participants.filter(p => p.id !== req.body.id), { ...req.body }].sort(((a,b) => a.id - b.id));
+    currentDatabase.participants = [...participants.filter(p => p.id !== req.body.id), { ...req.body }].sort(((a, b) => a.id - b.id));
+    fs.writeFileSync(dbPath, JSON.stringify(currentDatabase));
+    res.status(200).send();
+});
+
+app.delete('/participants/:id', (req, res) => {
+    const currentDatabase = JSON.parse(fs.readFileSync(dbPath));
+    const { participants } = currentDatabase;
+    const { id } = req.params;
+    // Remove from array by id
+    //currentDatabase.participants =  [...participants.filter(p => p.id !== req.body.id), { ...req.body }].sort(((a,b) => a.id - b.id));
     fs.writeFileSync(dbPath, JSON.stringify(currentDatabase));
     res.status(200).send();
 });
