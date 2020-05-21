@@ -1,5 +1,0 @@
-john
-daniel
-shaun
-joe
-foo

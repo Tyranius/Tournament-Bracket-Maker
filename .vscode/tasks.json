@@ -1,7 +1,34 @@
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
     "tasks": [
         {
-            
+            "type": "shell",
+            "label": "initialize-project",
+            "command": "npm i && cd ./app && npm i",
+            "windows": {
+                "command": "npm i ;; cd ./app ;; npm i"
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "start-server",
+            "command": "npm start && cd ./app && npm start",
+            "windows": {
+                "command": "npm start ;; cd ./app ;; npm start"
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "start-front-end",
+            "command": "cd ./app && npm run-script build-watch",
+            "windows": {
+                "command": "cd ./app ;; npm run-script build-watch"
+            },
+            "problemMatcher": []
         }
     ]
 }

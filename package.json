@@ -1,23 +1,18 @@
 {
-  "name": "tournament-bracket-maker",
+  "name": "tournament-bracket",
   "version": "1.0.0",
-  "description": "This will take a list of names and organize them into an orderly tournament.",
-  "main": "tournamentbracket.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./tournamentbracket.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dzrust/Tournament-Bracket-Maker.git"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dzrust/Tournament-Bracket-Maker/issues"
-  },
-  "homepage": "https://github.com/dzrust/Tournament-Bracket-Maker#readme",
   "dependencies": {
-    "body-parser": "^1.19.0"
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
