@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/dzrust/Tournament-Bracket-Maker/issues"
   },
-  "homepage": "https://github.com/dzrust/Tournament-Bracket-Maker#readme"
+  "homepage": "https://github.com/dzrust/Tournament-Bracket-Maker#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0"
+  }
 }

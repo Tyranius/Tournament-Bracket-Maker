@@ -106,7 +106,3 @@ let generateBracketFromInput = (input) => {
 }
 
 requestUserInput();
-
-
-
-

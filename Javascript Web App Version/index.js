@@ -3,9 +3,13 @@ const fs = require('fs')
 const path = require('path')
 const app = express()
 const port = 3000
+const bodyParser = require('body-parser')
 
 app.use('/public', express.static('dist'))
-
+const dbPath = path.join(__dirname, "./database.json");
+// parse application/json
+var jsonParser = bodyParser.json()
+app.use(bodyParser.json())
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"))
 }) // http://localhost:3000
@@ -14,48 +18,29 @@ app.get('/participants-text', (req, res) => {
     res.sendStatus(504);
 });
 
-const participant = {
-    id: 0,
-    name: "",
-    oponents: [],
-    wins: 0,
-    losses: 0
-};
-
-const participants = [
-    {
-        id: 0,
-        name: "Becca",
-        wins: 0,
-        losses: 0
-    },
-    {
-        id: 1,
-        name: "Daniel",
-        wins: 0,
-        losses: 0
-    },
-    {
-        id: 2,
-        name: "Shaun",
-        wins: 0,
-        losses: 0
-    },
-    {
-        id: 3,
-        name: "Kari",
-        wins: 0,
-        losses: 0
-    }
-]
-
 // Browser -> http://localhost:3000/participants
 // Sever -> {} to client
 app.get('/participants', (req, res) => {
-    setTimeout(() => {
-        res.json({participants});
-    }, 2000);
-})
+    res.json(JSON.parse(fs.readFileSync(dbPath)));
+});
+
+app.post('/participants', (req, res) => {
+    const currentDatabase = JSON.parse(fs.readFileSync(dbPath));
+    const { participants } = currentDatabase;
+    console.log(req.body);
+    currentDatabase.participants = [...participants, { ...req.body, id: participants[participants.length - 1].id + 1 }].sort(((a,b) => a.id - b.id));
+    fs.writeFileSync(dbPath, JSON.stringify(currentDatabase));
+    res.status(200).send();
+});
+
+app.put('/participants', (req, res) => {
+    const currentDatabase = JSON.parse(fs.readFileSync(dbPath));
+    const { participants } = currentDatabase;
+    console.log(req.body);
+    currentDatabase.participants = [...participants.filter(p => p.id !== req.body.id), { ...req.body }].sort(((a,b) => a.id - b.id));
+    fs.writeFileSync(dbPath, JSON.stringify(currentDatabase));
+    res.status(200).send();
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 

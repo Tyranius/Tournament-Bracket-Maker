@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect, useState, useContext } from 'react';
+import { AppNavigationContext } from "./App.jsx";
 // Create Bracket
 // Update Bracket (Who Won)
 // Add Participants
@@ -8,11 +8,12 @@ import React, { useEffect, useState } from 'react';
 // COMPONENT -> React Lingo
 // 2 kinds of component: Functional Component | Class Component
 // Functional Component -> Function
-const Participants = ({ something }) => {
+const Participants = ({ }) => {
     // State -> Encapsulated Information that only this component has access to.
     // useState == ReactJS. useState -> create a variable & a setter for that variable and only do this one time.
     const [participants, setParticipants] = useState(["Show me some participants please"]);
     const [isLoading, setIsLoading] = useState(true);
+    const navigation = useContext(AppNavigationContext);
     // Javascript identifiers: const, let, var
 
     // useEffect => ReactJS hook. What it does is it runs a function everytime a value in its dependency array changes (from props or state)
@@ -32,9 +33,13 @@ const Participants = ({ something }) => {
         loadParticipantsAsync();
     }, []);
 
+    /*createBracketImage(() => {
+    
+    });*/
+
     // 2x2 grid
     // setting player a vs player b
-    //Button next to each player that says winner
+    // Button next to each player that says winner
     // it will set wins / losses.
     // Players who won previous round will be set against players who won that same round.
     // Place tournament victor in a big old h1 (their name)
@@ -42,7 +47,7 @@ const Participants = ({ something }) => {
     // Render ReactJS Component
     return (<div>
         <h2>
-            Participants ({something})
+            Participants
         </h2>
         {
             isLoading
@@ -50,18 +55,45 @@ const Participants = ({ something }) => {
                     <div>Loading...</div>
                 ) : (
                     <div>
-                        <ul>
+                        <div>
                             {
                                 participants.map((participant) => {
                                     return (
-                                        <li>{participant.name}</li>
+                                        <div key={participant.id}>
+                                            <div>
+                                                {participant.name}, Wins: {participant.wins}, Losses: {participant.losses}
+                                            </div>
+                                            <div>
+                                                <button onClick={() => navigation.navigate("edit-participants", participant)}>Edit</button>
+                                            </div>
+                                            <div>
+                                                <button onClick={() => { alert("Implement me") }}>Delete</button>
+                                            </div>
+                                        </div>
+                                        //     <div key={participant.wins}>
+                                        //         <div>
+                                        //             {participant.wins}
+                                        //         </div>
+                                        //         <div>
+                                        //             <button onClick={() => navigation.navigate("edit-participants", participant)}>Edit</button>
+                                        //         </div>
+                                        //     </div>
+                                        //     <div key = {participant.losses}>
+                                        //         <div>
+                                        //             {participant.losses}
+                                        //         </div>
+                                        //         <div>
+                                        //             <button onClick = {() => navigation.navigate("edit-participants", participant)}>Edit</button>
+                                        //         </div>
+                                        //     </div>
                                     )
                                 })
                             }
-                        </ul>
+                        </div>
                     </div>
                 )
         }
+        <button onClick={() => navigation.navigate("edit-participants", {})}>Add Participant</button>
     </div>
     );
 };
