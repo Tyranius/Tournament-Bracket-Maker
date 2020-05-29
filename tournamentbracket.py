@@ -1,7 +1,30 @@
 import random
 
-with open("Participants.txt") as fh:
-    text = fh.read()
+answer = input("Would you like to use your own file? 'Yes' or 'No': ")
+if answer.lower() == "yes":
+    filename = input("Enter filename: ")
+    with open(filename) as fh:
+        text = fh.read()
+
+elif answer.lower() == "no":
+    #To ensure the input is a number
+    try:
+        peep_num = int(input("How many participants? "))
+    except ValueError:
+        print("Please enter a whole number")
+
+    # Allows the user to put their own names into the file
+    with open("Participants.txt", "w") as fh:
+        for i in range(peep_num):
+            Name = input("Input Name: ")
+            fh.write(Name + "\n")
+
+    # Had to seperate the open commands to overwrite any old versions.
+    with open("Participants.txt", "r") as fh:
+        text = fh.read()
+
+else:
+    print("Please enter 'Yes' or 'No'")
 
 # Read and separate the names in the file
 names = text.split()
