@@ -32,13 +32,39 @@ const Participants = ({ }) => {
     }, []);
 
     const onDelete = async (id) => {
-        // fetch(`http://localhost:3000/participants/${id}`) //
+        const deletePartic = fetch(`http://localhost:3000/participants/${id}`, {
+            method: 'DELETE'
+        }).then(() => {
+            console.log('deleted');
+        })
         // google: "How do i do a delete api call using fetch"
         // check status ie if (participantsResp.status === 200)
         
         await loadParticipantsAsync();
     }
-
+    // Ensure same participant can't be chosen to fight again
+    createBracketImage(() => {
+        let rows = [];
+        let participantID =[];
+        for (let rowNum = 0; rowNum < 2 /*eventually numPart/2*/; rowNum++){
+            let rowID = `row${rowNum+1}`;
+            let cell = [];
+            for(let cellNum = 0; cellNum < 3; cellNum++){
+                // don't allow it to produce the same number
+                // maybe remove it from an array instead
+                let partIDNum = 1 + Math.floor(Math.random()*3);
+                let cellID = `cell${rowNum}-${cellNum}`;
+                if (cellNum == 1){
+                    cell.push(<td key={cellID} id = {cellID}>vs.</td>)
+                }
+                else if(!participantID.includes(partIDNum)) {
+                    cell.push(<td key={cellID} id = {cellID}>{/*participant.id*/}</td>)
+                };
+                participantID.push(partIDNum);
+            };
+            rows.push(<tr key={rowNum} id = {rowID}>{cell}</tr>)
+        };
+    });
     /*createBracketImage(() => {
     
     });*/
