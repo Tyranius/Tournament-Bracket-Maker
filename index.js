@@ -45,7 +45,7 @@ app.delete('/participants/:id', (req, res) => {
     const { participants } = currentDatabase;
     const { id } = req.params;
     // Remove from array by id
-    //currentDatabase.participants =  [...participants.filter(p => p.id !== req.body.id), { ...req.body }].sort(((a,b) => a.id - b.id));
+    currentDatabase.participants = participants.filter(p => p.id !== Number(id)).sort(((a, b) => a.id - b.id));
     fs.writeFileSync(dbPath, JSON.stringify(currentDatabase));
     res.status(200).send();
 });

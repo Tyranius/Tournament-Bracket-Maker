@@ -32,42 +32,39 @@ const Participants = ({ }) => {
     }, []);
 
     const onDelete = async (id) => {
-        const deletePartic = fetch(`http://localhost:3000/participants/${id}`, {
+        const apiResponse = await fetch(`http://localhost:3000/participants/${id}`, {
             method: 'DELETE'
-        }).then(() => {
-            console.log('deleted');
-        })
+        });
+
         // google: "How do i do a delete api call using fetch"
-        // check status ie if (participantsResp.status === 200)
-        
-        await loadParticipantsAsync();
-    }
+        if (apiResponse.status === 200) {
+            setParticipants(participants.filter((participant) => participant.id !== id));
+        }
+    };
+    
     // Ensure same participant can't be chosen to fight again
-    createBracketImage(() => {
+    const createBracketImage = () => {
         let rows = [];
-        let participantID =[];
-        for (let rowNum = 0; rowNum < 2 /*eventually numPart/2*/; rowNum++){
-            let rowID = `row${rowNum+1}`;
+        let participantID = [];
+        for (let rowNum = 0; rowNum < 2 /*eventually numPart/2*/; rowNum++) {
+            let rowID = `row${rowNum + 1}`;
             let cell = [];
-            for(let cellNum = 0; cellNum < 3; cellNum++){
+            for (let cellNum = 0; cellNum < 3; cellNum++) {
                 // don't allow it to produce the same number
                 // maybe remove it from an array instead
-                let partIDNum = 1 + Math.floor(Math.random()*3);
+                let partIDNum = 1 + Math.floor(Math.random() * 3);
                 let cellID = `cell${rowNum}-${cellNum}`;
-                if (cellNum == 1){
-                    cell.push(<td key={cellID} id = {cellID}>vs.</td>)
+                if (cellNum == 1) {
+                    cell.push(<td key={cellID} id={cellID}>vs.</td>)
                 }
-                else if(!participantID.includes(partIDNum)) {
-                    cell.push(<td key={cellID} id = {cellID}>{/*participant.id*/}</td>)
+                else if (!participantID.includes(partIDNum)) {
+                    cell.push(<td key={cellID} id={cellID}>{/*participant.id*/}</td>)
                 };
                 participantID.push(partIDNum);
             };
-            rows.push(<tr key={rowNum} id = {rowID}>{cell}</tr>)
+            rows.push(<tr key={rowNum} id={rowID}>{cell}</tr>)
         };
-    });
-    /*createBracketImage(() => {
-    
-    });*/
+    };
 
     // 2x2 grid
     // setting player a vs player b
@@ -99,7 +96,7 @@ const Participants = ({ }) => {
                                                 <button onClick={() => navigation.navigate("edit-participants", participant)}>Edit</button>
                                             </div>
                                             <div>
-                                                <button onClick={() => { alert("Implement me") }}>Delete</button>
+                                                <button onClick={() => onDelete(participant.id)}>Delete</button>
                                             </div>
                                         </div>
                                     )

@@ -1,20 +1,6 @@
 import React, { useState } from 'react';
 import { AppNavigationContext } from "./App.jsx";
 
-/**
- * Project Requirements
- * As a Tournament Admin I would like to add participants to my Tournament
- *      Project Requirements:
- *          [x] Add Participant
- *              [x] Give them a name
- *              [x] Their current Wins and Losses
- *              [x] Persist this data
- *          [x] Let me edit those Participants that are already created
- *          [x] Show me a list of current participants (that we have stored)
- *          [ ] Let me delete a participant
- */
-//
-//const ParticipantEditor = (props) => {    
 export const ParticipantEditor = ({ participant }) => {
     const [name, setName] = useState(participant.name || ""); //hook function
     const [wins, setWins] = useState(participant.wins || 0);
