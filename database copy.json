@@ -1,0 +1,28 @@
+{
+  "participants": [
+    {
+        "id": 0,
+        "name": "Becca",
+        "wins": 0,
+        "losses": 0
+    },
+    {
+        "id": 1,
+        "name": "Daniel",
+        "wins": 0,
+        "losses": 0
+    },
+    {
+        "id": 2,
+        "name": "Shaun",
+        "wins": 0,
+        "losses": 0
+    },
+    {
+        "id": 3,
+        "name": "Kari",
+        "wins": 0,
+        "losses": 0
+    }
+  ]
+}
